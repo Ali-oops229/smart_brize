@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Rice Type Detection</title>
+  <meta name="description" content="A web app that predicts rice type using AI.">
+  <meta name="keywords" content="rice type classification, AI, deep learning, agriculture">
+
+  <!-- Favicons -->
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Poppins" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Navigation to Prediction Page -->
+    <a href="{{ url_for('pred') }}">
+      <button>Go to Details Page</button>
+    </a>
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+      <div class="hero-container" data-aos="fade-up">
+        <h1>Welcome to Rice Type Detection</h1>
+        <h2>This model can detect rice type based on rice images.</h2>
+        <a href="{{ url_for('details') }}" class="btn-get-started scrollto">Predict</a>
+      </div>
+    </section>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+      <div class="container d-flex align-items-center justify-content-between">
+        <div class="logo">
+          <h1 class="text-light"><a href="/"><span>Rice Type Detection</span></a></h1>
+        </div>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="/">Home</a></li>
+            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li><a class="nav-link scrollto" href="#testimonials">Testimonials</a></li>
+            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            <li><a class="nav-link scrollto" href="{{ url_for('details') }}">Predict</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <!-- ======= About Section ======= -->
+      <section id="about" class="about">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-5">
+              <img src="{{ url_for('static', filename='img/about.jpg') }}" alt="About Image" class="about-img">
+            </div>
+            <div class="col-lg-7">
+              <div class="content">
+                <h3>About the Rice Type Classification Model</h3>
+                <p>This model is built using Convolutional Neural Network and trained on labelled images of rice.</p>
+                <ul class="features">
+                  <li><strong>Accuracy:</strong> Predicts correctly 97% of the time.</li>
+                  <li><strong>Varieties Detected:</strong> 5 different rice types.</li>
+                  <li><strong>Dataset Source:</strong> Kaggle rice image dataset.</li>
+                  <li><strong>Model Architecture:</strong> MobileNetV4 with transfer learning.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= Testimonials Section ======= -->
+      <section id="testimonials" class="testimonials">
+        <div class="container position-relative">
+          <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+              {% for i in range(1, 6) %}
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <img src="{{ url_for('static', filename='img/testimonials/testimonials-' ~ i ~ '.jpg') }}" class="testimonial-img" alt="Testimonial {{ i }}">
+                  <h3>Person {{ i }}</h3>
+                  <h4>Role</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    Sample testimonial text for person {{ i }}.
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= Contact Us Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+          <div class="section-title" data-aos="fade-down">
+            <span>Contact Us</span>
+            <h2>Contact Us</h2>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
+              <div class="info-box">
+                <i class="bx bx-map"></i>
+                <h3>Our Address</h3>
+                <p>A108 Adam Street, Pune, India</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+              <div class="info-box">
+                <i class="bx bx-envelope"></i>
+                <h3>Email Us</h3>
+                <p>info@example.com<br>contact@example.com</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+              <div class="info-box">
+                <i class="bx bx-phone-call"></i>
+                <h3>Call Us</h3>
+                <p>+91 55892 55488<br>+91 66782 25444</p>
+              </div>
+            </div>
+          </div>
+
+          <form action="{{ url_for('contact') }}" method="POST" role="form" class="php-email-form mt-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+            </div>
+            <div class="form-group mt-3">
+              <textarea name="message" class="form-control" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading">Loading...</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 footer-contact">
+              <h3>Rice</h3>
+              <p>
+                A108 Adam Street<br>Pune, 535022<br>India<br><br>
+                <strong>Phone:</strong> +91 55895 54885<br>
+                <strong>Email:</strong> info@example.com<br>
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Our Services</h4>
+              <ul>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">AI Model</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Data Analysis</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Consulting</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container py-4">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Rice</span></strong>. All Rights Reserved
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
